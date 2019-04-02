@@ -1,15 +1,17 @@
-var http = require("http");
+const express = require('express');
+const app = express();
 
-http.createServer(function (request, response) {
+app.listen(4500, function () {
+    console.log('listening on 4500')
+})
+app.use(bodyParser.urlencoded({
+    extended: true
+}))
 
-   // Send the HTTP header 
-   // HTTP Status: 200 : OK
-   // Content Type: text/plain
-   response.writeHead(200, {'Content-Type': 'text/plain'});
-   
-   // Send the response body as "Hello World"
-   response.end('Hello World\n');
-}).listen(8081);
+app.get('/', function (req, res) {
+    res.send('Hello World')
+})
 
-// Console will print the message
-console.log('Server running at http://127.0.0.1:8081/');
+app.post('/quotes', (req, res) => {
+    console.log(req.body)
+})
